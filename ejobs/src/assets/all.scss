@@ -1,5 +1,5 @@
-// 載入bootstrap方法
 @import "~bootstrap/scss/functions";
-// 自定義變數
-@import "./helpers/variables";
+@import "./helpers/_variables";
 @import "~bootstrap/scss/bootstrap";
+
+@import "./_dashboard";

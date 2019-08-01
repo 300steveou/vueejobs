@@ -1,8 +1,9 @@
 <template>
-  <div class="hello">
+  <div class="hello"> 
     <a href="#" @click.prevent="signout">登出</a>
   </div>
 </template>
+ 
 
 <script>
 export default {
@@ -27,6 +28,7 @@ export default {
 
 <!--scoped意思是指會在這運行 封裝在特定元件內-->
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
 h3 {
   margin: 40px 0 0;
