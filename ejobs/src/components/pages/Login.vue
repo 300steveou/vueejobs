@@ -45,15 +45,15 @@ export default {
   },
   methods: {
     signin() {
-      // not work...
-      // const api = `${process.env.APIPATH}/signin`;
-      const api = " https://vue-course-api.hexschool.io/signin";
+      // not work...  
+      // const apis = `${process.env.APIPATH}/signin`;
+      const api = "https://vue-course-api.hexschool.io/signin";
       const vm = this;
       this.$http.post(api, vm.user).then(response => {
         console.log(response.data);
         if (response.data.success) {
           // not work...
-          vm.$router.push("/admin/products");
+          vm.$router.push("/admin/");
         }
       });
     }

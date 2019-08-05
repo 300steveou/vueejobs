@@ -8,14 +8,11 @@
 
 export default {
   name: "App",
-  created() {
-    // 遠端路徑
-    const api = " https://vue-course-api.hexschool.io/api/300steveou/products";
-    console.log(process.env.APIPATH, process.env.CUSTOMPATH); 
-    this.$http.get(api).then(response => {
-      console.log(response.data);
-    });
-  }
+  created() { 
+   console.log(process.env.VUE_APP_API);
+  //  console.log(process.env.VUE_APP_APIPATH);
+  
+  },
   // components: {
   //   HelloWorld
   // }

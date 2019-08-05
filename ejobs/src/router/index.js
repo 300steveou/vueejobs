@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Dashboard from "@/components/Dashboard";
 import Login from "@/components/pages/Login";
-import Products from "@/components/pages/Products";
+import Products from '@/components/pages/Products';
 
 Vue.use(Router);
 
@@ -31,11 +31,12 @@ export default new Router({
       component: Dashboard,      
       children :[
         {
-          path: '/products',
+          // path 不用'/'
+          path: 'products',
           name: 'Products',
           component: Products,
           // 驗證
-          // meta: { requiresAuth: true },
+          meta: { requiresAuth: true },
         },
       ],
     },
