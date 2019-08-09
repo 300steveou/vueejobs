@@ -1,19 +1,25 @@
 // 習慣把第三方套件放上面
 import Vue from 'vue'
-import BootstrapVue from 'bootstrap-vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Loading from 'vue-loading-overlay';
+
 import App from './App.vue'
 import router from './router'
-import 'bootstrap';
-//import 'bootstrap/dist/css/bootstrap.css'
+import BootstrapVue from 'bootstrap-vue'
+
+import 'bootstrap'; 
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(BootstrapVue) 
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
-
+Vue.component('Loading',Loading)
+import 'vue-loading-overlay/dist/vue-loading.css';
+// 參閱acios文件
+// session 會存在application cookie裡面
 axios.defaults.withCredentials = true;
+
 
 new Vue({
   el: '#app',

@@ -9,13 +9,8 @@
 export default {
   name: "App",
   created() { 
-   console.log(process.env.VUE_APP_API);
-  //  console.log(process.env.VUE_APP_APIPATH);
-  
-  },
-  // components: {
-  //   HelloWorld
-  // }
+   const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}}/products`; 
+  }, 
 };
 </script>
  
@@ -23,3 +18,4 @@ export default {
 // 載入module
 @import "./assets/all";
 </style>
+

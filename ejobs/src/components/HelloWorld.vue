@@ -12,8 +12,9 @@ export default {
     return {};
   },
   methods: {
+    // 登出
     signout() {
-      const api = " https://vue-course-api.hexschool.io/logout";
+      const api = `${process.env.VUE_APP_APIPATH}/logout`;
       const vm = this;
       this.$http.post(api, vm.user).then(response => {
         console.log(response.data);

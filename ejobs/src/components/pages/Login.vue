@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--prevent:把預設先排掉-->
     <form class="form-signin" @submit.prevent="signin">
       <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>
       <label for="inputEmail" class="sr-only">Email address</label>
@@ -38,22 +39,20 @@ export default {
   data() {
     return {
       user: {
-        username: "",
-        password: ""
+        username: '',
+        password: '',
       }
     };
   },
   methods: {
-    signin() {
-      // not work...  
-      // const apis = `${process.env.APIPATH}/signin`;
-      const api = "https://vue-course-api.hexschool.io/signin";
-      const vm = this;
+    // sign in 事件
+    signin() { 
+      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`; 
+      const vm = this; 
       this.$http.post(api, vm.user).then(response => {
         console.log(response.data);
-        if (response.data.success) {
-          // not work...
-          vm.$router.push("/admin/");
+        if (response.data.success) { 
+          vm.$router.push("/admin/products");
         }
       });
     }

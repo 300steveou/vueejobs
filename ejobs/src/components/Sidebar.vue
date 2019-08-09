@@ -5,14 +5,14 @@
         <li class="nav-item">
           <a class="nav-link active" href="#">
             <span data-feather="home"></span>
-            Dashboard
+            產品列表
             <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
             <span data-feather="file"></span>
-            Orders
+            訂單列表
           </a>
         </li>
         <li class="nav-item">

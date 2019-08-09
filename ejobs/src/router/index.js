@@ -12,17 +12,12 @@ export default new Router({
       path: '*',
       redirect :'login',
     },
-    // {
-    //   // 元件呈現的名稱
-    //   name: '首頁',
-    //   // 對應的虛擬路徑
-    //   path: '/',
-    //   // 對應的元件
-    //   component: HelloWorld
-    // },
     {
+      // 對應的虛擬路徑
       path: '/login',
+       // 元件呈現的名稱
       name: 'Login',
+      // 對應的元件
       component: Login
     },
     {
