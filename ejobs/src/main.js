@@ -3,20 +3,24 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Loading from 'vue-loading-overlay';
-
-import App from './App.vue'
-import router from './router'
 import BootstrapVue from 'bootstrap-vue'
-
+import 'vue-loading-overlay/dist/vue-loading.css';
 import 'bootstrap'; 
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
+import App from './App.vue';
+import router from './router';
+import './bus';
+import currencyFilter from './filters/currency';
+
+ 
 Vue.use(BootstrapVue) 
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 Vue.component('Loading',Loading)
-import 'vue-loading-overlay/dist/vue-loading.css';
-// 參閱acios文件
+Vue.filter('currency',currencyFilter)
+
+// 參閱axios文件
 // session 會存在application cookie裡面
 axios.defaults.withCredentials = true;
 

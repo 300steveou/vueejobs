@@ -1,6 +1,8 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
+    <div><h2>產品列表</h2></div>
+    
     <div class="text-right mt-4">
       <button class="btn btn-primary" @click="openModal(true)">建立新的產品</button>
     </div>
@@ -19,8 +21,8 @@
         <tr v-for="(item) in products" :key="item.id">
           <td>{{ item.category }}</td>
           <td>{{ item.title }}</td>
-          <td class="text-right">{{ item.origin_price}}</td>
-          <td class="text-right">{{ item.price}}</td>
+          <td class="text-right">{{ item.origin_price|currency }}</td>
+          <td class="text-right">{{ item.price|currency}}</td>
           <td>
             <span v-if="item.is_enabled" class="text-success">啟用</span>
             <span v-else>未啟用</span>
@@ -34,6 +36,21 @@
         </tr>
       </tbody>
     </table>
+    <!--分頁-->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item" :class="{'disabled': !pagination.has_pre}">
+          <!-- <span class="page-link" @click.prevent="getProducts(pagination.current_page-1)">Previous</span> -->
+          <a class="page-link" href="#" @click.prevent="getProducts(pagination.current_page-1)">Previous</a>
+        </li>
+        <li class="page-item" v-for="page in pagination.total_pages" :key="page" :class="{'active':pagination.current_page === page}">
+           <a class="page-link" href="#" @click.prevent="getProducts(page)">{{page}}</a>
+        </li>
+        <li class="page-item" :class="{'disabled': !pagination.has_next}">
+          <a class="page-link" href="#" @click.prevent="getProducts(pagination.current_page+1)">Next</a>
+        </li>
+      </ul>
+    </nav> 
     <!-- Modal -->
     <div
       class="modal fade"
@@ -193,6 +210,8 @@ export default {
   data() {
     return {
       products: [],
+      // 分頁
+      pagination: {},
       tempProduct: {},
       // 判斷新增或修改
       isNew: false,
@@ -203,14 +222,15 @@ export default {
     };
   },
   methods: {
-    getProducts() {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products`;
+    getProducts(page = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
       const vm = this;
       vm.isLoading = true;
       this.$http.get(api).then(response => {
         console.log(response.data);
         vm.isLoading = false;
         vm.products = response.data.products;
+        vm.pagination = response.data.pagination;
       });
     },
     // 燈箱
@@ -230,10 +250,10 @@ export default {
     updateProduct() {
       let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`;
       let httpMethod = "post";
-      const vm = this; 
+      const vm = this;
       if (!vm.isNew) {
         api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-        
+
         httpMethod = "put";
       }
       console.log(api);
@@ -277,7 +297,7 @@ export default {
     deleteProduct(item) {
       const vm = this;
       console.log(item);
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${item}`; 
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${item}`;
       this.$http.delete(url).then(response => {
         console.log(response, vm.tempProduct);
         $("#delProductModal").modal("hide");
@@ -288,6 +308,7 @@ export default {
   },
   created() {
     this.getProducts();
+    this.$bus.$emit("message:push", "這裡是一段訊息", "success");
   }
 };
 </script>
