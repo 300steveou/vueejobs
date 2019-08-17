@@ -252,13 +252,12 @@ export default {
       let httpMethod = "post";
       const vm = this;
       if (!vm.isNew) {
-        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-
+        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`; 
         httpMethod = "put";
       }
       console.log(api);
       this.$http[httpMethod](api, { data: vm.tempProduct }).then(response => {
-        // console.log(response.data);
+         console.log(response.data);
         if (response.data.success) {
           $("#productModal").modal("hide");
           vm.getProducts();
